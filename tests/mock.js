@@ -92,7 +92,7 @@ test("mockShouldThrowString", function() {
 
 	raises(function(){
 		m();
-	}, "some error", "should throw string");
+	}, "some error", "throws string");
 });
 
 test("mockShouldThrowError", function() {
@@ -102,7 +102,7 @@ test("mockShouldThrowError", function() {
 
 	raises(function(){
 		m();
-	}, Error, "should throw error");
+	}, Error, "throws error");
 });
 
 // this it"s actually testing QUnit works fine, but I guess it doesn"t hurt
@@ -116,7 +116,7 @@ test("mockShouldThrowExpectedError", function() {
 		m();
 	}, function(error) {
 		return error === expectedError;
-	}, "should throw error");
+	}, "throws error");
 });
 
 test("mockShouldThrowstrictEqualErrorTwice", function() {
@@ -127,11 +127,11 @@ test("mockShouldThrowstrictEqualErrorTwice", function() {
 
 	raises(function(){
 		m();
-	}, Error, "should throw error");
+	}, Error, "throws error");
 	raises(function(){
 		m();
-	}, Error, "should throw error");
-	strictEqual(m(), "hello world", "should return hello world")
+	}, Error, "throws error");
+	strictEqual(m(), "hello world", "returns hello world")
 });
 
 test("mockShouldInvokeCallback", function() {
@@ -313,7 +313,7 @@ test("thisShouldBeBoundToObject", function() {
 
 	o.m();
 	
-	strictEqual(o.m.calls[0].this, o, "this should be bound to object");
+	strictEqual(o.m.calls[0].this, o, "this bound to object");
 });
 
 test("beforeShouldReturnTrue", function() {
@@ -415,5 +415,5 @@ test("afterShouldReturnFalseWhenCalledOnMock", function() {
 test("noConflictShouldRestoreOriginalWindowMock", function() {
 	mock.noConflict();
 	
-	strictEqual(window.mock, undefined, "restore window.mock");
+	strictEqual(window.mock, undefined, "restores window.mock");
 });
