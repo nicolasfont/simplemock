@@ -256,8 +256,8 @@ test("calledWithShouldReturnTrue", function() {
 	m(1);
 	m(2);
 	
-	ok(m.calls[0].calledWith(1), "m first call called with 1");
-	ok(m.calls[1].calledWith(2), "m first call called with 2");
+	ok(m.calls[0].calledWith(1), "first call called with 1");
+	ok(m.calls[1].calledWith(2), "first call called with 2");
 });
 
 test("calledWithShouldReturnFalse", function() {
@@ -265,7 +265,7 @@ test("calledWithShouldReturnFalse", function() {
 
 	m(1);
 	
-	ok(!m.calls[0].calledWith(2), "m first call not called with 2");
+	ok(!m.calls[0].calledWith(2), "first call not called with 2");
 });
 
 test("calledWithShouldReturnTrueWhenCalledOnMock", function() {
@@ -287,15 +287,15 @@ test("calledWithShouldReturnFalseWhenCalledOnMock", function() {
 	m(1);
 	m(7);
 	
-	ok(!m.calledWith(2), "m not calledWith 2");
-	ok(!m.calledWith(1), "m not calledWith 1");
-	ok(!m.calledWith(7), "m not called three times");
+	ok(!m.calledWith(2), "first call not called with 2");
+	ok(!m.calledWith(1), "second not called with 1");
+	ok(!m.calledWith(7), "not called three times");
 });
 
 test("calledWithShouldReturnFalseWhenCalledOnMockAndMockNeverCalled", function() {
 	var m = mock();
 
-	ok(!m.calledWith(7), "m never called");
+	ok(!m.calledWith(7), "never called");
 });
 
 test("argumentsShouldReturnCallArguments", function() {
@@ -304,8 +304,8 @@ test("argumentsShouldReturnCallArguments", function() {
 	m(1);
 	m(2);
 	
-	strictEqual(m.calls[0].arguments[0], 1, "m first call arguments are correctly saved");
-	strictEqual(m.calls[1].arguments[0], 2, "m second call arguments are correctly saved");
+	strictEqual(m.calls[0].arguments[0], 1, "first call arguments are correctly saved");
+	strictEqual(m.calls[1].arguments[0], 2, "second call arguments are correctly saved");
 });
 
 test("thisShouldBeBoundToObject", function() {
@@ -313,7 +313,7 @@ test("thisShouldBeBoundToObject", function() {
 
 	o.m();
 	
-	strictEqual(o.m.calls[0].this, o, "callee should be bound to object");
+	strictEqual(o.m.calls[0].this, o, "this should be bound to object");
 });
 
 test("beforeShouldReturnTrue", function() {
