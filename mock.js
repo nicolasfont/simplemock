@@ -2,7 +2,7 @@
 	var mock = function() {
 		var returnValues = [];
 		var calls = [];
-	
+		
 		var f = function() {
 			calls.push({
 				callDate: new Date(),
@@ -21,7 +21,7 @@
 						};
 					}
 					return true;
-			    }
+				}
 			});
 			
 			// wait 1 millisecond so that callDates are different
@@ -31,7 +31,7 @@
 			var returnValue = returnValues[calls.length - 1] || returnValues[returnValues.length - 1];
 			return returnValue && returnValue.apply(this, arguments);
 		};
-	
+		
 		var addReturnValue = function(times, f) {
 			var t = 1;
 			
@@ -66,7 +66,7 @@
 		};
 		
 		f.calls = calls;
-	
+		
 		f.called = function() {
 			return calls.length;
 		};
@@ -80,7 +80,7 @@
 		};
 		
 		var calledWithIndex = 0;
-		f.calledWith = function(){
+		f.calledWith = function() {
 			if (calledWithIndex >= this.calls.length) {
 				return false;
 			}
