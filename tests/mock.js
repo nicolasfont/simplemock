@@ -411,3 +411,9 @@ test("afterShouldReturnFalseWhenCalledOnMock", function() {
 	strictEqual(m2.called(), 1, "m2 called once");
 	ok(!m1.after(m2));
 });
+
+test("noConflictShouldRestoreOriginalWindowMock", function() {
+	mock.noConflict();
+	
+	strictEqual(window.mock, undefined, "restore window.mock");
+});
