@@ -226,7 +226,7 @@ test("mockShouldReturnInvokeAndThrowUsingChainedCalls", function() {
 test("calledShouldReturnZeroWhenNeverCalled", function() {
 	var m = mock();
 
-	ok(!m.called(), "has not been called");
+	ok(!m.called(), "not called");
 });
 
 test("calledShouldReturn1WhenCalledOnce", function() {
@@ -236,7 +236,7 @@ test("calledShouldReturn1WhenCalledOnce", function() {
 
 	m();
 	
-	strictEqual(m.called(), 1, "has been called once");
+	strictEqual(m.called(), 1, "called once");
 });
 
 test("calledShouldReturn2WhenCalledTwice", function() {
@@ -247,7 +247,7 @@ test("calledShouldReturn2WhenCalledTwice", function() {
 	m();
 	m();
 	
-	strictEqual(m.called(), 2, "has been called twice");
+	strictEqual(m.called(), 2, "called twice");
 });
 
 test("calledWithShouldReturnTrue", function() {
