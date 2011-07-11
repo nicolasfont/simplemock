@@ -105,7 +105,7 @@ test("mockShouldThrowError", function() {
 	}, Error, "throws error");
 });
 
-// this it"s actually testing QUnit works fine, but I guess it doesn"t hurt
+// this is actually testing QUnit but testing never hurts
 test("mockShouldThrowExpectedError", function() {
 	var m = mock();
 	var expectedError = new Error("some error");
