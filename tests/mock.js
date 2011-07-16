@@ -9,7 +9,7 @@ test("mockShouldReturnUndefinedWhenReturnNotCalled", function() {
 test("mockShouldReturnExpectedValue", function() {
 	var m = mock();
 
-	m.return("hello world");
+	m.returnValue("hello world");
 
 	strictEqual(m(), "hello world", "returns hello world");
 });
@@ -17,8 +17,8 @@ test("mockShouldReturnExpectedValue", function() {
 test("mockShouldReturnDifferentValuesWhenCalledTwice", function() {
 	var m = mock();
 
-	m.return("hello");
-	m.return("world");
+	m.returnValue("hello");
+	m.returnValue("world");
 
 	strictEqual(m(), "hello", "returns hello");
 	strictEqual(m(), "world", "returns world");
@@ -27,8 +27,8 @@ test("mockShouldReturnDifferentValuesWhenCalledTwice", function() {
 test("mockShouldReturnSameValuesWhenCalledMoreThanTwice", function() {
 	var m = mock();
 
-	m.return("hello");
-	m.return("world");
+	m.returnValue("hello");
+	m.returnValue("world");
 
 	strictEqual(m(), "hello", "returns hello");
 	strictEqual(m(), "world", "returns world");
@@ -38,8 +38,8 @@ test("mockShouldReturnSameValuesWhenCalledMoreThanTwice", function() {
 test("mockShouldReturnSameValueTwoTimes", function() {
 	var m = mock();
 
-	m.return("hello", 2);
-	m.return("world");
+	m.returnValue("hello", 2);
+	m.returnValue("world");
 
 	strictEqual(m(), "hello", "returns hello");
 	strictEqual(m(), "hello", "returns world");
@@ -49,7 +49,7 @@ test("mockShouldReturnSameValueTwoTimes", function() {
 test("mockShouldReturnUndefinedWhenZeroTimes", function() {
 	var m = mock();
 
-	m.return("hello", 0);
+	m.returnValue("hello", 0);
 
 	strictEqual(m(), undefined, "returns undefined");
 });
@@ -57,8 +57,8 @@ test("mockShouldReturnUndefinedWhenZeroTimes", function() {
 test("mockShouldReturnValueWhenZeroTimes", function() {
 	var m = mock();
 
-	m.return("hello", 0);
-	m.return("world");
+	m.returnValue("hello", 0);
+	m.returnValue("world");
 
 	strictEqual(m(), "world", "returns world");
 });
@@ -66,9 +66,9 @@ test("mockShouldReturnValueWhenZeroTimes", function() {
 test("mockShouldReturnUndefinedWhenCalledThreeTimes", function() {
 	var m = mock();
 
-	m.return("hello");
-	m.return("world");
-	m.return(undefined);
+	m.returnValue("hello");
+	m.returnValue("world");
+	m.returnValue(undefined);
 
 	strictEqual(m(), "hello", "returns hello");
 	strictEqual(m(), "world", "returns world");
@@ -78,8 +78,8 @@ test("mockShouldReturnUndefinedWhenCalledThreeTimes", function() {
 test("mockShouldReturnExcpectedWhenExpectingFalsyValue", function() {
 	var m = mock();
 
-	m.return(0);
-	m.return("hello world");
+	m.returnValue(0);
+	m.returnValue("hello world");
 
 	strictEqual(m(), 0, "returns 0");
 	strictEqual(m(), "hello world", "returns hello world");
@@ -88,7 +88,7 @@ test("mockShouldReturnExcpectedWhenExpectingFalsyValue", function() {
 test("mockShouldThrowString", function() {
 	var m = mock();
 
-	m.throw("some error");
+	m.throwError("some error");
 
 	raises(function(){
 		m();
@@ -98,7 +98,7 @@ test("mockShouldThrowString", function() {
 test("mockShouldThrowError", function() {
 	var m = mock();
 
-	m.throw(new Error("some error"));
+	m.throwError(new Error("some error"));
 
 	raises(function(){
 		m();
@@ -110,7 +110,7 @@ test("mockShouldThrowExpectedError", function() {
 	var m = mock();
 	var expectedError = new Error("some error");
 	
-	m.throw(expectedError);
+	m.throwError(expectedError);
 
 	raises(function(){
 		m();
@@ -119,11 +119,11 @@ test("mockShouldThrowExpectedError", function() {
 	}, "throws error");
 });
 
-test("mockShouldThrowstrictEqualErrorTwice", function() {
+test("mockShouldThrowSameErrorTwice", function() {
 	var m = mock();
 
-	m.throw(new Error("some error"), 2);
-	m.return("hello world")
+	m.throwError(new Error("some error"), 2);
+	m.returnValue("hello world")
 
 	raises(function(){
 		m();
@@ -165,7 +165,7 @@ test("mockShouldInvokeCallbackTwoTimes", function() {
 	m.invoke(function(){
 		return 1;
 	}, 2);
-	m.return("hello world");
+	m.returnValue("hello world");
 
 	strictEqual(m(), 1, "invokes function");
 	strictEqual(m(), 1, "invokes function");
@@ -188,7 +188,7 @@ test("mockShouldInvokeCallbackOnAnObjectTwoTimes", function() {
 	o.m.invoke(function(){
 		return this === o;
 	}, 2);
-	o.m.return("hello world");
+	o.m.returnValue("hello world");
 
 	ok(o.m(), "this bound to object");
 	ok(o.m(), "this bound to object");
@@ -198,11 +198,11 @@ test("mockShouldInvokeCallbackOnAnObjectTwoTimes", function() {
 test("mockShouldReturnInvokeAndThrow", function() {
 	var m = mock();
 	
-	m.return("hello world");
+	m.returnValue("hello world");
 	m.invoke(function(){
 		return 1;
 	});
-	m.throw(new Error("some error"));
+	m.throwError(new Error("some error"));
 
 	strictEqual(m(), "hello world", "returns hello world");
 	strictEqual(m(), 1, "invokes function");
@@ -214,7 +214,7 @@ test("mockShouldReturnInvokeAndThrow", function() {
 test("mockShouldReturnInvokeAndThrowUsingChainedCalls", function() {
 	var m = mock();
 	
-	m.return("hello world").invoke(function(){ return 1; }).throw(new Error("some error"));
+	m.returnValue("hello world").invoke(function(){ return 1; }).throwError(new Error("some error"));
 
 	strictEqual(m(), "hello world", "returns hello world");
 	strictEqual(m(), 1, "invokes function");
@@ -232,7 +232,7 @@ test("calledShouldReturnZeroWhenNeverCalled", function() {
 test("calledShouldReturn1WhenCalledOnce", function() {
 	var m = mock();
 
-	m.return("hello world");
+	m.returnValue("hello world");
 
 	m();
 	
@@ -242,7 +242,7 @@ test("calledShouldReturn1WhenCalledOnce", function() {
 test("calledShouldReturn2WhenCalledTwice", function() {
 	var m = mock();
 
-	m.return("hello world");
+	m.returnValue("hello world");
 
 	m();
 	m();
@@ -308,12 +308,12 @@ test("argumentsShouldReturnCallArguments", function() {
 	strictEqual(m.calls[1].arguments[0], 2, "second call arguments are correctly saved");
 });
 
-test("thisShouldBeBoundToObject", function() {
+test("thatShouldBeBoundToObject", function() {
 	var o = { m: mock() };
 
 	o.m();
 	
-	strictEqual(o.m.calls[0].this, o, "this bound to object");
+	strictEqual(o.m.calls[0].that, o, "this bound to object");
 });
 
 test("beforeShouldReturnTrue", function() {
@@ -410,10 +410,4 @@ test("afterShouldReturnFalseWhenCalledOnMock", function() {
 	strictEqual(m1.called(), 1, "m1 called once");
 	strictEqual(m2.called(), 1, "m2 called once");
 	ok(!m1.after(m2));
-});
-
-test("noConflictShouldRestoreOriginalWindowMock", function() {
-	mock.noConflict();
-	
-	strictEqual(window.mock, undefined, "restores window.mock");
 });
